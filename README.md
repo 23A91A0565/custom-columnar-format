@@ -151,6 +151,20 @@ Only uses:
 
 If both match → ✔ Your implementation works!
 
+Example:
+
+
+`input.csv:`
+
+<img width="594" height="268" alt="Screenshot 2025-12-07 193346" src="https://github.com/user-attachments/assets/6c153833-d69a-4958-99c9-4d3964133731" />
+
+
+
+`reconstructed.csv:`
+
+<img width="593" height="268" alt="Screenshot 2025-12-07 193407" src="https://github.com/user-attachments/assets/71b32fcf-3495-49de-aa74-8a8b71e42a27" />
+
+
 ---
 
 # 🏁 Summary
