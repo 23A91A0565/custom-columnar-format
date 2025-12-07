@@ -9,7 +9,6 @@ TYPE_INT32 = 1
 TYPE_FLOAT64 = 2
 TYPE_STRING = 3
 
-
 def pack_int32_list(values):
     """Pack list of integers into bytes (little-endian)."""
     return b"".join(struct.pack("<i", v) for v in values)
