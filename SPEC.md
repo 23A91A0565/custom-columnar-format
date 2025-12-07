@@ -1,8 +1,8 @@
-\# Custom Columnar File Format Specification
+# Custom Columnar File Format Specification
 
 
 
-\## 1. Overview
+## 1. Overview
 
 This document defines a simplified custom columnar file format created to understand
 
@@ -18,11 +18,11 @@ column reads, and compresses each column using zlib.
 
 Supported data types:
 
-\- int32 (32-bit integer)
+- int32 (32-bit integer)
 
-\- float64 (64-bit floating point)
+- float64 (64-bit floating point)
 
-\- string (UTF-8 variable-length text)
+- string (UTF-8 variable-length text)
 
 
 
@@ -36,7 +36,7 @@ column layout, and encoding rules.
 
 
 
-\## 2. File Layout
+## 2. File Layout
 
 
 
@@ -44,7 +44,7 @@ The file is stored in the following order:
 
 
 
-1\. \*\*MAGIC (4 bytes)\*\*  
+1. MAGIC (4 bytes)
 
 &nbsp;  A fixed 4-byte ASCII identifier (e.g., `"MCF1"`).  
 
@@ -52,7 +52,7 @@ The file is stored in the following order:
 
 
 
-2\. \*\*HEADER\_SIZE (4 bytes, uint32 LE)\*\*  
+2. HEADER_SIZE (4 bytes, uint32 LE)
 
 &nbsp;  Size of the HEADER section in bytes.  
 
@@ -60,7 +60,7 @@ The file is stored in the following order:
 
 
 
-3\. \*\*HEADER (variable length)\*\*  
+3. HEADER (variable length)
 
 &nbsp;  Contains:
 
@@ -90,19 +90,19 @@ The file is stored in the following order:
 
 
 
-4\. \*\*COLUMN\_BLOCK\_1\*\*  
+4. COLUMN_BLOCK_1
 
 &nbsp;  Compressed (zlib) data block for column 1.
 
 
 
-5\. \*\*COLUMN\_BLOCK\_2\*\*  
+5. COLUMN_BLOCK_2
 
 &nbsp;  Compressed zlib block for column 2.
 
 
 
-6\. \*\*COLUMN\_BLOCK\_3\*\*  
+6. COLUMN_BLOCK_3 
 
 &nbsp;  …
 
@@ -118,11 +118,11 @@ Their absolute byte offsets are recorded in the HEADER.
 
 
 
-\## 3. Header Structure
+## 3. Header Structure
 
 
 
-\### 3.1 Fixed Header Fields
+### 3.1 Fixed Header Fields
 
 ```
 
@@ -138,7 +138,7 @@ Their absolute byte offsets are recorded in the HEADER.
 
 
 
-\### 3.2 Per-Column Metadata
+### 3.2 Per-Column Metadata
 
 ```
 
@@ -160,7 +160,7 @@ Their absolute byte offsets are recorded in the HEADER.
 
 
 
-\### String Column Extra Metadata (TYPE\_CODE = 3)
+### String Column Extra Metadata (TYPE\_CODE = 3)
 
 ```
 
@@ -174,13 +174,13 @@ Their absolute byte offsets are recorded in the HEADER.
 
 
 
-\### Type Codes
+### Type Codes
 
-\- `1` → int32  
+- `1` → int32  
 
-\- `2` → float64  
+- `2` → float64  
 
-\- `3` → string  
+- `3` → string  
 
 
 
@@ -188,37 +188,36 @@ Their absolute byte offsets are recorded in the HEADER.
 
 
 
-\## 4. Column Block Format
+## 4. Column Block Format
 
 
 
-\### 4.1 int32 Columns
+### 4.1 int32 Columns
 
-\- Raw uncompressed layout: sequence of 4-byte little-endian integers  
+- Raw uncompressed layout: sequence of 4-byte little-endian integers  
 
-\- Entire byte sequence compressed using zlib  
+- Entire byte sequence compressed using zlib  
 
-\- Stored at `DATA\_OFFSET`
-
-
-
-\### 4.2 float64 Columns
-
-\- Raw uncompressed layout: sequence of 8-byte IEEE-754 little-endian values  
-
-\- Compressed using zlib  
-
-\- Stored at `DATA\_OFFSET`
+- Stored at `DATA\_OFFSET`
 
 
+### 4.2 float64 Columns
 
-\### 4.3 string Columns
+- Raw uncompressed layout: sequence of 8-byte IEEE-754 little-endian values  
+
+- Compressed using zlib  
+
+- Stored at `DATA\_OFFSET`
+
+
+
+### 4.3 string Columns
 
 Each string column uses \*\*two blocks\*\*:
 
 
 
-\#### 1. String Data Block  
+#### 1. String Data Block  
 
 Concatenation of all UTF-8 strings:
 
@@ -236,7 +235,7 @@ Compressed and stored at `DATA\_OFFSET`.
 
 
 
-\#### 2. Offsets Block  
+#### 2. Offsets Block  
 
 Stores ending byte index of each string:
 
@@ -246,7 +245,7 @@ Example strings:
 
 ```
 
-\["Alice", "Bob", "Cat"]
+["Alice", "Bob", "Cat"]
 
 ```
 
@@ -266,7 +265,7 @@ Offsets array:
 
 ```
 
-\[5, 8, 11]
+[5, 8, 11]
 
 ```
 
@@ -280,13 +279,13 @@ Compressed separately and stored at `OFFSETS\_OFFSET`.
 
 
 
-\## 5. Endianness \& Compression
+## 5. Endianness \& Compression
 
 
 
-\- All multi-byte integers and floats use \*\*little-endian\*\* encoding.  
+- All multi-byte integers and floats use \*\*little-endian\*\* encoding.  
 
-\- All column blocks (including string offsets) are compressed with \*\*zlib (DEFLATE)\*\*.
+- All column blocks (including string offsets) are compressed with \*\*zlib (DEFLATE)\*\*.
 
 
 
