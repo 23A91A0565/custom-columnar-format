@@ -85,6 +85,9 @@ This generates a file like:
 ```
 output.mcf
 ```
+Example:
+
+<img width="1006" height="119" alt="Screenshot 2025-12-07 192259" src="https://github.com/user-attachments/assets/56fd32ec-b9be-4d6d-baf0-918d33008c71" />
 
 ---
 
@@ -102,6 +105,10 @@ reconstructed.csv
 
 This file should match your original CSV exactly.
 
+Example:
+
+<img width="1067" height="94" alt="Screenshot 2025-12-07 192331" src="https://github.com/user-attachments/assets/acad3edf-498d-4061-895c-20c169603980" />
+
 ---
 
 # 📂 Folder Structure
@@ -117,6 +124,10 @@ custom-columnar-format/
 ├── README.md               # This file
 └── __pycache__/            # Auto-generated
 ```
+
+Example:
+
+<img width="1158" height="635" alt="Screenshot 2025-12-07 192727" src="https://github.com/user-attachments/assets/4c669c33-b68c-4093-a9e4-94a41cb88da4" />
 
 ---
 
